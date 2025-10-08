@@ -2,8 +2,12 @@
 
 // TODO refactoriser le code pour respecter le principe LSP de la programmation SOLID
 
+interface Shape 
+{
+    public function calculateArea();
+}
 
-class Rectangle 
+class Rectangle  implements Shape
 {
     protected $height;
     protected $width; 
@@ -34,19 +38,23 @@ class Rectangle
     }
 }
 
-class Square extends Rectangle {
+class Square implements Shape {
+    protected $side;
     
-	public function setWidth($width) 
+	public function setSide($side) 
 	{
-		$this->width = $width;
-		$this->height = $width;
+		$this->side = $side;
 	}
 	
-	public function setHeight($height) 
+	public function getSide() 
 	{
-		$this->width = $height;
-		$this->height = $height;
+		return $this->side;
 	}
+
+    public function calculateArea()
+    {
+        return $this->side ** 2;
+    }
 }
 
 class GraphicEditor
@@ -55,5 +63,10 @@ class GraphicEditor
     {
         $rectangle->setHeight($rectangle->getHeight() * 2);
         $rectangle->setWidth($rectangle->getWidth() * 4);
+    }
+
+    public function resizeSquare(Square $square)
+    {
+        $square->setSide($square->getSide() * 2); 
     }
 }
