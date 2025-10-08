@@ -13,11 +13,23 @@ class Account
 {
     public function getBalance() {}
     public function setBalance() {}
+
+
+
+    public function calculateBalance(Customer $customer)
+    {
+        $customer->getAccount()->setBalance($customer->getAccount()->getBalance() - $this->getValue());
+    }
 }
 
 class Customer 
 {
     public function getAccount() {}
+
+    public function haveBalanceAvailable(Customer $customer, $value)
+    {
+        return $customer->getAccount()->getBalance() >= $value;
+    }
 }
 
 class Sale
@@ -39,15 +51,9 @@ class Sale
         $this->calculateBalance($customer);
     }
     
-    public function calculateBalance(Customer $customer)
-    {
-        $customer->getAccount()->setBalance($customer->getAccount()->getBalance() - $this->getValue());
-    }
     
-    public function haveBalanceAvailable(Customer $customer, $value)
-    {
-        return $customer->getAccount()->getBalance() >= $value;
-    }
+    
+    
     
     private function calculateTotalValue(array $products)
     {
@@ -60,3 +66,4 @@ class Sale
         return $value;
     }
 }
+
