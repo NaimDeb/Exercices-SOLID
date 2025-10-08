@@ -2,7 +2,11 @@
 
 namespace DIPViolation;
 
-class Worker
+interface IWorker
+{
+    public function work();
+}
+class Worker implements IWorker
 {
     public function work()
     {
@@ -10,7 +14,7 @@ class Worker
     }
 }
 
-class SuperWorker
+class SuperWorker implements IWorker
 {
     public function work()
     {
@@ -20,13 +24,13 @@ class SuperWorker
 
 class Manager
 {
-    /** @var Worker */
+    /** @var IWorker */
     private $worker;
 
     /**
-     * @param Worker $worker
+     * @param IWorker $worker
      */
-    public function setWorker(Worker $worker)
+    public function setWorker(IWorker $worker)
     {
         $this->worker = $worker;
     }
