@@ -7,20 +7,7 @@ class GasStation
 
     public function putGasInVehicle(Vehicle $vehicle)
     {
-        if ($vehicle->getType() == 1)
-            $this->putGasInCar($vehicle);
-        elseif ($vehicle->getType() == 2)
-            $this->putGasInMotorcycle($vehicle);
-    }
-
-    public function putGasInCar(Car $car)
-    {
-        $car->setTank(50);
-    }
-
-    public function putGasInMotorcycle(Motorcycle $motorcycle)
-    {
-        $motorcycle->setTank(20);
+        $vehicle->setTank($vehicle->getMaxTank());
     }
 
 }
@@ -29,6 +16,7 @@ class Vehicle
 {
     protected $type;
     protected $tank;
+    protected $maxTank;
 
     public function getType()
     {
@@ -39,14 +27,21 @@ class Vehicle
     {
         $this->tank = $tank;
     }
+
+    public function getMaxTank()
+    {
+        return $this->maxTank;
+    }
 }
 
 class Car extends Vehicle
 {
     protected $type = 1;
+    protected $maxTank = 50;
 }
 
 class Motorcycle extends Vehicle
 {
     protected $type = 2;
+    protected $maxTank = 20;
 }
