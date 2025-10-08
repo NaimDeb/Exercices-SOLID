@@ -2,23 +2,30 @@
 
 // TODO refactoriser le code pour respecter le Principe de d'Invertion de Dépendence de la programmation SOLID
 
+abstract class Device {
+    public function on(){}
+}
 
-class Computer
+class Computer implements Device
 {
-    public function on() {}
 }
 
 class Button 
 {
     /**
-     * @var Computer
+     * @var Device
      */
-    private $computer;
+    private $device;
+
+    public function __construct(Device $device)
+    {
+        $this->device = $device;
+    }
 
     public function activate()
     {
-        if (condition) { //some condition
-            $this->computer->on();
+        if (1 == 1) { //some condition
+            $this->device->on();
         }
     }
 }
