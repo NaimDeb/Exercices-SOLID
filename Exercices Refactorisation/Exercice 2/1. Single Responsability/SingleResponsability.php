@@ -2,7 +2,19 @@
 
 namespace SRPViolation;
 
-class Modem
+
+interface DataChannel
+{
+    public function send($c);
+    public function receive();
+}
+interface Connection
+{
+    public function dial($pno);
+    public function hangup();
+}
+
+class Modem implements Connection, DataChannel
 {
     public function dial($pno)
     {
