@@ -7,38 +7,29 @@ class Vehicle
     public function run(){}
 }
 
-class Motorcycle extends Vehicle
+interface CanTurnOn
 {
-    
+    function turnOn();
 }
 
-class Car extends Vehicle
+class Motorcycle extends Vehicle implements CanTurnOn
 {
-    
+    function turnOn(){ echo 'Turning on the car';}
+}
+
+class Car extends Vehicle implements CanTurnOn
+{
+    function turnOn(){echo 'Turning on the motorcycle';}
 }
 
 class Driver 
 {
     public function drive(Vehicle $vehicle)
     {
-        if ($vehicle instanceof Motorcycle) {
-            $this->turnOnMotorcycle();
+        if ($vehicle instanceof CanTurnOn) {
+            $vehicle->turnOn();
         }       
         
-        if ($vehicle instanceof Car) {
-            $this->turnOnCar();
-        }
-        
         $vehicle->run();
-    }
-    
-    private function turnOnCar()
-    {
-        echo 'Turning on the car';
-    }
-    
-    private function turnOnMotorcycle()
-    {
-        echo 'Turning on the motorcycle';
     }
 }
