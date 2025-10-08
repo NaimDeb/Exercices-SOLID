@@ -8,6 +8,8 @@ class Rectangle
     protected $width;
     /** @var  integer */
     protected $height;
+    /** @var  bool */
+    protected $isSquare = false;
 
     /**
      * @param $width
@@ -15,6 +17,7 @@ class Rectangle
     public function setWidth($width)
     {
         $this->width = $width;
+        $this->checkIfSquare();
     }
 
     /**
@@ -23,6 +26,7 @@ class Rectangle
     public function setHeight($height)
     {
         $this->height = $height;
+        $this->checkIfSquare();
     }
 
     /**
@@ -32,26 +36,10 @@ class Rectangle
     {
         return $this->height * $this->width;
     }
-}
 
-class Square extends Rectangle
-{
-    /**
-     * @param $width
-     */
-    public function setWidth($width)
+    public function checkIfSquare()
     {
-        $this->width = $width;
-        $this->height = $width;
-    }
-
-    /**
-     * @param $height
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
-        $this->width = $height;
+        $this->isSquare = ($this->height == $this->width);
     }
 }
 
@@ -62,7 +50,7 @@ class TestLS
      */
     private static function getNewRectangle()
     {
-        return new Square();
+        return new Rectangle();
     }
 
     /**
@@ -73,7 +61,7 @@ class TestLS
         $rectangle = self::getNewRectangle();
         $rectangle->setHeight(5);
         $rectangle->setWidth(10);
-        // user knows that $rectangle it's a rectangle.
+        // user knows that $rectangle is a rectangle.
         // It assumes that he's able to set the width and height as for the base class
 
 
